@@ -1,0 +1,10 @@
+*~
+*.o
+*#
+*.swp
+*.swo
+42sh
+*.bak
+test
+*.log
+chip8
