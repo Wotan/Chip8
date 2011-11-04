@@ -1,5 +1,6 @@
 #include "emulator.h"
 #include "op.h"
+#include "graphics.h"
 
 int	op_FX07(WORD opcode, t_emulator *emu)
 {
@@ -12,7 +13,26 @@ int	op_FX07(WORD opcode, t_emulator *emu)
 
 int	op_FX0A(WORD opcode, t_emulator *emu)
 {
-  printf("Not implemented yet FX0A\n");
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  SDL_Event event;
+  int	run = 1;
+  int	i;
+
+  printf("Waiting event\n");
+  while (run)
+    {
+      SDL_WaitEvent(&event);
+      if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
+	exit(EXIT_SUCCESS);
+      for (i = 0; i < 16; i++)
+	{
+	  if (key_tab[i] == event.key.keysym.sym)
+	    {
+	      emu->cpu_register[VX] = i;
+	      run = 0;
+	    }
+	}
+    }
   return 0;
 }
 

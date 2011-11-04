@@ -13,6 +13,26 @@
 
 # include "SDL/SDL.h"
 
+static const unsigned int key_tab[16] =
+{
+  SDLK_KP0,
+  SDLK_KP1,
+  SDLK_KP2,
+  SDLK_KP3,
+  SDLK_KP4,
+  SDLK_KP5,
+  SDLK_KP6,
+  SDLK_KP7,
+  SDLK_KP8,
+  SDLK_KP9,
+  SDLK_a,
+  SDLK_b,
+  SDLK_c,
+  SDLK_d,
+  SDLK_e,
+  SDLK_f
+};
+
 typedef struct	s_graphics
 {
   SDL_Surface	*screen;
