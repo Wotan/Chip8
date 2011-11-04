@@ -16,7 +16,7 @@ int	op_BNNN(WORD opcode, t_emulator *emu)
 
 int	op_CXNN(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
+  WORD  VX = (opcode & 0x0F00) >> 8;
 
   CHECK_REGISTER(VX);
 
@@ -32,8 +32,8 @@ int	op_DXYN(WORD opcode, t_emulator *emu)
   int	i, j;
   int	x, y;
   int	tmp;
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);

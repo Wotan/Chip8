@@ -12,7 +12,7 @@ int	op_FX07(WORD opcode, t_emulator *emu)
 
 int	op_FX0A(WORD opcode, t_emulator *emu)
 {
-  printf("Not implemented yet\n");
+  printf("Not implemented yet FX0A\n");
   return 0;
 }
 
@@ -86,7 +86,7 @@ int	op_FX55(WORD opcode, t_emulator *emu)
 
 int	op_FX65(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
+  WORD  VX = (opcode & 0x0F00) >> 8;
   unsigned int i;
 
   CHECK_REGISTER(VX);

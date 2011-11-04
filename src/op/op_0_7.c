@@ -58,7 +58,7 @@ int	op_3XNN(WORD opcode, t_emulator *emu)
 
 int	op_4XNN(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
+  WORD  VX = (opcode & 0x0F00) >> 8;
 
   CHECK_REGISTER(VX);
   if (emu->cpu_register[VX] != (opcode & 0x00FF))
@@ -68,8 +68,8 @@ int	op_4XNN(WORD opcode, t_emulator *emu)
 
 int	op_5XY0(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -90,7 +90,7 @@ int	op_6XNN(WORD opcode, t_emulator *emu)
 
 int	op_7XNN(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
+  WORD  VX = (opcode & 0x0F00) >> 8;
 
   CHECK_REGISTER(VX);
   emu->cpu_register[VX] += (opcode & 0x00FF);

@@ -3,8 +3,8 @@
 
 int	op_8XY0(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -14,8 +14,8 @@ int	op_8XY0(WORD opcode, t_emulator *emu)
 
 int	op_8XY1(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -25,8 +25,8 @@ int	op_8XY1(WORD opcode, t_emulator *emu)
 
 int	op_8XY2(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -36,8 +36,8 @@ int	op_8XY2(WORD opcode, t_emulator *emu)
 
 int	op_8XY3(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -47,8 +47,8 @@ int	op_8XY3(WORD opcode, t_emulator *emu)
 
 int	op_8XY4(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -64,8 +64,8 @@ int	op_8XY4(WORD opcode, t_emulator *emu)
 
 int	op_8XY5(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -89,8 +89,8 @@ int	op_8XY6(WORD opcode, t_emulator *emu)
 
 int	op_8XY7(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -104,8 +104,8 @@ int	op_8XY7(WORD opcode, t_emulator *emu)
 
 int	op_8XYE(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
@@ -116,8 +116,8 @@ int	op_8XYE(WORD opcode, t_emulator *emu)
 
 int	op_9XY0(WORD opcode, t_emulator *emu)
 {
-  WORD  VX = (opcode & 0x0F00) / 0x100;
-  WORD  VY = (opcode & 0x00F0) / 0x10;
+  WORD  VX = (opcode & 0x0F00) >> 8;
+  WORD  VY = (opcode & 0x00F0) >> 4;
 
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
