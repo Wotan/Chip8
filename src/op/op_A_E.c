@@ -52,14 +52,8 @@ int	op_DXYN(WORD opcode, t_emulator *emu)
 	    {
 	      tmp = is_pixel_set(emu->graphics, x + i, y + j);
 	      if (tmp)
-		{
-		  emu->cpu_register[0xF] = 1;
-		  set_pixel(emu->graphics, x + i, y + j, 0);
-		}
-	      else
-		{
-		  set_pixel(emu->graphics, x + i, y + j, 1);
-		}
+		emu->cpu_register[0xF] = 1;
+	      set_pixel(emu->graphics, x + i, y + j, !tmp);
 	    }
 	}
     }
