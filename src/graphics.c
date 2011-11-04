@@ -53,7 +53,7 @@ int	set_pixel(t_graphics *graphics, int x, int y, int on)
 
   p = (Uint8 *)graphics->screen->pixels +
     y * graphics->screen->pitch + x * bpp;
-  if (y > 32 * 8 || x > 64 * 8 || x < 0 || y < 0)
+  if (y >= 32 * 8 || x >= 64 * 8 || x < 0 || y < 0)
     return 1;
   for (j = 0; j < 8; j++)
     {
