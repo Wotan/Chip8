@@ -26,8 +26,7 @@ int		main(int ac, char **av)
 	break ;
       if (!pause)
 	do_cycle(emu);
-      /* sync_CPU(); */
-      SDL_Flip(graphics->screen);
+      sync_CPU();
     }
   delete_graphics(graphics);
   free(emu);

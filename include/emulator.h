@@ -15,7 +15,7 @@
 # define NB_REGISTER 16
 # define STACK_SIZE 16
 # define MEMORY_SIZE 0xFFF
-# define FREQUENCE 100 /* Hertz */
+# define FREQUENCE 150 /* Hertz */
 # define CHECK_STACK(x) if (!(((x) >= 0 && (x) < STACK_SIZE)))\
     {printf("Error, stack overflow or no adress on stack\n"); return 1;}
 # define CHECK_REGISTER(x) if (!((x) < NB_REGISTER))\
