@@ -70,9 +70,9 @@ int	op_8XY5(WORD opcode, t_emulator *emu)
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
   if (emu->cpu_register[VY] > emu->cpu_register[VX])
-    emu->cpu_register[0xF] = 1;
-  else
     emu->cpu_register[0xF] = 0;
+  else
+    emu->cpu_register[0xF] = 1;
   emu->cpu_register[VX] -= emu->cpu_register[VY];
   return 0;
 }
@@ -95,9 +95,9 @@ int	op_8XY7(WORD opcode, t_emulator *emu)
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
   if (emu->cpu_register[VY] > emu->cpu_register[VX])
-    emu->cpu_register[0xF] = 1;
-  else
     emu->cpu_register[0xF] = 0;
+  else
+    emu->cpu_register[0xF] = 1;
   emu->cpu_register[VX] = emu->cpu_register[VY] - emu->cpu_register[VX];
   return 0;
 }
