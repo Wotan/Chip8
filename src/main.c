@@ -20,6 +20,9 @@ int		main(int ac, char **av)
       return EXIT_FAILURE;
     }
   emu->graphics = graphics;
+  printf("===== Chip8 emulator =====\n");
+  printf("P to toogle pause\n");
+  printf("Echap to exit\n");
   for(;;)
     {
       if (handle_events(emu, graphics, &pause) == 1)
