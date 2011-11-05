@@ -5,7 +5,7 @@
 ** Login   <aubey_g@epitech.net>
 ** 
 ** Started on  Thu Nov  3 10:46:26 2011 geoffroy aubey
-** Last update Thu Nov  3 10:46:26 2011 geoffroy aubey
+** Last update Sat Nov  5 23:40:41 2011 geoffroy aubey
 */
 
 #ifndef GRAPHICS_H_
@@ -33,17 +33,22 @@ static const unsigned int key_tab[16] =
   SDLK_f
 };
 
-typedef struct	s_graphics
+class	Graphics
 {
-  SDL_Surface	*screen;
-  char		key[16];
-  int		p_release;
-}		t_graphics;
+public:
+  Graphics();
+  ~Graphics();
+  bool		IsPixelSet(int x, int y);
+  void		SetPixel(int x, int y, bool on);
+  void		Flip();
+  void		Clear();
+  int		HandleEvents(class Emulator *emu, int *pause);
+  bool		IsKeyUp(int numKey);
 
-int	init_graphics(t_graphics **graphics);
-int	delete_graphics(t_graphics *graphics);
-int	is_pixel_set(t_graphics *graphics, int x, int y);
-int	set_pixel(t_graphics *graphics, int x, int y, int on);
-
+private:
+  SDL_Surface	*mScreen;
+  char		mKey[16];
+  int		mPRelease;
+};
 
 #endif /* !GRAPHICS_H_ */

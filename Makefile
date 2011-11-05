@@ -29,29 +29,29 @@ LDINC		+= 	-I include
 ifeq ($(DEBUG),yes)
 	CFLAGS	+=  -g3 -ggdb
 	NAME := $(DEBUG_DIR)/$(NAME)
-	CC = gcc
+	CC = g++
 
 else
 	NAME := $(RELEASE_DIR)/$(NAME)
 	CFLAGS	+= -O3 -ffast-math -funroll-all-loops -funroll-loops
-	CC = gcc
+	CC = g++
 endif
 
 CFLAGS	+=	-W -Wall -pedantic $(LDINC)
 
-SRC	=	main.c		\
-		graphics.c	\
-		events.c	\
-		sync.c		\
-		emulator.c	\
-		op/op_0_7.c	\
-		op/op_8_9.c	\
-		op/op_A_E.c	\
-		op/op_F.c
+SRC	=	main.cpp	\
+		graphics.cpp	\
+		events.cpp	\
+		sync.cpp	\
+		emulator.cpp	\
+		op/op_0_7.cpp	\
+		op/op_8_9.cpp	\
+		op/op_A_E.cpp	\
+		op/op_F.cpp
 
 SRC 	:= 	$(addprefix $(SRCDIR),$(SRC))
 
-OBJ	=    	$(SRC:.c=.o)
+OBJ	=    	$(SRC:.cpp=.o)
 
 all:   		$(NAME)
 
@@ -60,7 +60,7 @@ $(NAME):  	$(OBJ)
 		@$(CC) $^ -o $(NAME) $(CFLAGS) $(LDFLAGS) $(LDINC)
 		@$(PRINTF) "\033[01m-> \033[32mDone. No error found.\n\033[0m"
 
-%.o: %.c
+%.o: %.cpp
 	        @$(CC) -c $< -o $@ $(CFLAGS) $(LDINC)
 		@$(PRINTF) "\033[32mSuccessfully compiled\033[1;32m $@\033[0;32m ...\n\033[0m"
 

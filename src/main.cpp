@@ -4,7 +4,7 @@
 
 int		main(int ac, char **av)
 {
-  t_graphics	*graphics;
+  Graphics	*graphics;
   t_emulator	*emu;
   int		pause = 1;
 
@@ -13,26 +13,22 @@ int		main(int ac, char **av)
       printf("Not enought arguments\n");
       return EXIT_FAILURE;
     }
-  init_graphics(&graphics);
-  if ((emu = init_emulator(av[1])) == NULL)
-    {
-      perror(av[1]);
-      return EXIT_FAILURE;
-    }
-  emu->graphics = graphics;
+  graphics = new Graphics();
+  emu = new Emulator(av[1]);
+  emu->SetGraphics(graphics);
   printf("===== Chip8 emulator =====\n");
   printf("P to toogle pause\n");
   printf("Echap to exit\n");
   for(;;)
     {
-      if (handle_events(emu, graphics, &pause) == 1)
+      if (graphics->HandleEvents(emu, &pause) == 1)
 	break ;
       if (!pause)
-	do_cycle(emu);
+	emu->DoCycle();
       sync_CPU();
     }
-  delete_graphics(graphics);
-  free(emu);
+  delete graphics;
+  delete emu;
   return (0);
 }
 
