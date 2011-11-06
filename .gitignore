@@ -8,3 +8,5 @@
 test
 *.log
 chip8
+Makefile
+moc_*

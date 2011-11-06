@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <QString>
+#include <QFile>
+#include <QFileDialog>
 #include "emulator.h"
 #include "op.h"
 
@@ -166,25 +169,29 @@ int		Emulator::DoCycle()
   return 0;
 }
 
-Emulator::Emulator(char *file_name)
+Emulator::Emulator()
 {
-  FILE	*file;
-  int	i;
-
-  if ((file = fopen(file_name, "r")) == NULL)
-    return ;
-
-  fread(&memory[0x200], 1, MEMORY_SIZE, file);
-  fclose(file);
+  QString	fileName;
 
   stack_ptr = -1;
   PC = 0x200;
   I = 0;
   timer = 0;
   sound_timer = 0;
-  for (i = 0; i < 16; i++)
+  for (int i = 0; i < 16; i++)
     cpu_register[i] = 0;
   LoadFont();
+}
+
+bool	Emulator::Open(QString &fileName)
+{
+  QFile file(fileName);
+
+  if (!file.open(QIODevice::ReadOnly))
+    return false;
+  file.read((char *)&memory[0x200], MEMORY_SIZE);
+  file.close();
+  return true;
 }
 
 void	Emulator::SetGraphics(Graphics *new_graphics)

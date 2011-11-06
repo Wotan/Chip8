@@ -1,35 +1,26 @@
 #include <iostream>
+#include <QApplication>
+#include <QMainWindow>
 #include "emulator.h"
 #include "graphics.h"
 
 int		main(int ac, char **av)
 {
   Graphics	*graphics;
-  t_emulator	*emu;
-  int		pause = 1;
+  QApplication	app(ac, av);
+  QMainWindow	mainWindow;
 
-  if (ac < 2)
-    {
-      std::cout << "Not enought arguments" << std::endl;
-      return EXIT_FAILURE;
-    }
-  graphics = new Graphics();
-  emu = new Emulator(av[1]);
-  emu->SetGraphics(graphics);
+  mainWindow.setMaximumSize (WIN_X, WIN_Y + 25);
+  mainWindow.setMinimumSize (WIN_X, WIN_Y + 25);
+
+  graphics = new Graphics(&mainWindow, &app, QPoint(0, 25), QSize(WIN_X, WIN_Y));
+
   std::cout << "===== Chip8 emulator =====" << std::endl;
-  std::cout << "P to toogle pause" << std::endl;
-  std::cout << "Echap to exit" << std::endl;
-  for(;;)
-    {
-      if (graphics->HandleEvents(emu, &pause) == 1)
-	break ;
-      if (!pause)
-	for (int i = 0; i < FREQUENCE / 60; i++)
-	  emu->DoCycle();
-      graphics->Flip();
-    }
+  graphics->show();
+  mainWindow.show();
+  app.exec();
   delete graphics;
-  delete emu;
+  std::cout << "Bye Bye" << std::endl;
   return (0);
 }
 

@@ -4,21 +4,32 @@
 typedef unsigned char BYTE;
 typedef unsigned short WORD;
 
+# include <QString>
 # include "graphics.h"
+
 # define NB_REGISTER 16
 # define STACK_SIZE 16
 # define MEMORY_SIZE 0xFFF
 # define FREQUENCE 200 /* Hertz */
+# define PIXEL_SIZE 8
+
+# define NB_PIXELX 64
+# define NB_PIXELY 32
+
+# define WIN_X NB_PIXELX * PIXEL_SIZE
+# define WIN_Y NB_PIXELY * PIXEL_SIZE
+
 # define CHECK_STACK(x) if (!(((x) >= 0 && (x) < STACK_SIZE)))\
     {printf("Error, stack overflow or no adress on stack\n"); return 1;}
 # define CHECK_REGISTER(x) if (!((x) < NB_REGISTER))			\
     {printf("Error, register adress is out of range\n"); return 1;}
 class Graphics;
 
-typedef class Emulator
+class Emulator
 {
 public:
-  Emulator(char *file_name);
+  Emulator();
+  bool		Open(QString &fileName);
   int	        DoCycle();
   WORD		GetWord(int addr) const;
   int		LoadFont();
@@ -70,9 +81,6 @@ private:
   BYTE		sound_timer;
   Graphics	*graphics;
 
-}		t_emulator;
-
-void		sync_CPU();
-t_emulator	*init_emulator(char *file_name);
+};
 
 #endif /* EMULATOR_H_ */
