@@ -1,4 +1,4 @@
-#include <SDL/SDL.h>
+#include <iostream>
 #include "emulator.h"
 #include "graphics.h"
 
@@ -10,22 +10,23 @@ int		main(int ac, char **av)
 
   if (ac < 2)
     {
-      printf("Not enought arguments\n");
+      std::cout << "Not enought arguments" << std::endl;
       return EXIT_FAILURE;
     }
   graphics = new Graphics();
   emu = new Emulator(av[1]);
   emu->SetGraphics(graphics);
-  printf("===== Chip8 emulator =====\n");
-  printf("P to toogle pause\n");
-  printf("Echap to exit\n");
+  std::cout << "===== Chip8 emulator =====" << std::endl;
+  std::cout << "P to toogle pause" << std::endl;
+  std::cout << "Echap to exit" << std::endl;
   for(;;)
     {
       if (graphics->HandleEvents(emu, &pause) == 1)
 	break ;
       if (!pause)
-	emu->DoCycle();
-      sync_CPU();
+	for (int i = 0; i < FREQUENCE / 60; i++)
+	  emu->DoCycle();
+      graphics->Flip();
     }
   delete graphics;
   delete emu;

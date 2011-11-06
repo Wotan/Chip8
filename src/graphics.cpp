@@ -1,72 +1,86 @@
-#include <SDL/SDL.h>
+#include <iostream>
 #include "graphics.h"
 
 Graphics::Graphics()
 {
-  int	i;
+  mPRelease = 0;
+  mWindow.Create(sf::VideoMode(64 * 8, 32 * 8), "Wotan's Chip8 emulator");
+  mWindow.SetFramerateLimit(60);
+  for (int i = 0; i < 8 * 8 * 4; i++)
+    mBlackSprite[i] = 0x00;
+  for (int i = 0; i < 8 * 8 * 4; i++)
+    mWhiteSprite[i] = 0xFF;
 
-  SDL_Init(SDL_INIT_VIDEO);
-  mScreen = SDL_SetVideoMode(64 * 8, 32 * 8, 32,
-			    SDL_HWSURFACE);
+  mScreen.Create(64 * 8, 32 * 8);
+  mScreenSprite.SetTexture(mScreen);
 
-  SDL_WM_SetCaption("Wotan's Chip8 emulator", NULL);
+  Clear();
+  Flip();
 
-  for (i = 0; i < 16; i++)
-    mKey[i] = 0;
+  for (int i = 0; i < 64; i++)
+    for (int j = 0; j < 32; j++)
+      mPixelTab[i][j] = false;
+
   mPRelease = 1;
+  mKey[0x0] = sf::Keyboard::Numpad0;
+  mKey[0x1] = sf::Keyboard::Numpad1;
+  mKey[0x2] = sf::Keyboard::Numpad2;
+  mKey[0x3] = sf::Keyboard::Numpad3;
+  mKey[0x4] = sf::Keyboard::Numpad4;
+  mKey[0x5] = sf::Keyboard::Numpad5;
+  mKey[0x6] = sf::Keyboard::Numpad6;
+  mKey[0x7] = sf::Keyboard::Numpad7;
+  mKey[0x8] = sf::Keyboard::Numpad8;
+  mKey[0x9] = sf::Keyboard::Numpad9;
+  mKey[0xA] = sf::Keyboard::Q;
+  mKey[0xB] = sf::Keyboard::W;
+  mKey[0xC] = sf::Keyboard::E;
+  mKey[0xD] = sf::Keyboard::R;
+  mKey[0xE] = sf::Keyboard::T;
+  mKey[0xF] = sf::Keyboard::Y;
 }
+
 Graphics::~Graphics()
 {
-  SDL_Quit();
+
 }
 
 bool	Graphics::IsPixelSet(int x, int y)
 {
-  Uint8 *p;
-  unsigned int	bpp = 4;
-
-  x = x * 8;
-  y = y * 8;
-
   if (y > 32 * 8 || x > 64 * 8 || x < 0 || y < 0)
     return 0;
-  p = (Uint8 *)mScreen->pixels + y * mScreen->pitch + x * bpp;
-  return (p[1] == 0xFF ? 1 : 0);
+  return mPixelTab[x][y];
 }
 
 void	Graphics::SetPixel(int x, int y, bool on)
 {
-  unsigned int	bpp = 4;
-  Uint8 *p;
-  unsigned int i, j;
-
-  x = x * 8;
-  y = y * 8;
-
-  p = (Uint8 *)mScreen->pixels + y * mScreen->pitch + x * bpp;
   if (y >= 32 * 8 || x >= 64 * 8 || x < 0 || y < 0)
     return ;
-  for (j = 0; j < 8; j++)
-    {
-      for (i = 0; i < bpp * 8; i++)
-	p[i] = on ? 0xFF : 0x0;
-      p += mScreen->pitch;
-    }
+  mPixelTab[x][y] = on;
+  if (on)
+    mScreen.Update(mWhiteSprite, 8, 8, x * 8, y * 8);
+  else
+    mScreen.Update(mBlackSprite, 8, 8, x * 8, y * 8);
 }
 
 void	Graphics::Flip()
 {
-  SDL_Flip(mScreen);
+  mWindow.Clear();
+  mWindow.Draw(mScreenSprite);
+  mWindow.Display();
 }
 
 void	Graphics::Clear()
 {
-  SDL_FillRect(mScreen, NULL, SDL_MapRGB(mScreen->format, 0, 0, 0));
+  for (int i = 0; i < 64; i++)
+    for (int j = 0; j < 32; j++)
+      SetPixel(i, j, false);
 }
 
-bool	Graphics::IsKeyUp(int numKey)
+bool	Graphics::IsKeyUp(BYTE numKey)
 {
-  if (mKey[numKey] == 1)
+  if (sf::Keyboard::IsKeyPressed(mKey[numKey]))
     return true;
-  return false;
+  else
+    return false;
 }

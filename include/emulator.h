@@ -1,15 +1,8 @@
-/*
-** emulator.c for  in /home/wotan/projets/chip8
-** 
-** Made by geoffroy aubey
-** Login   <aubey_g@epitech.net>
-** 
-** Started on  Thu Nov  3 00:15:16 2011 geoffroy aubey
-** Last update Sat Nov  5 22:33:30 2011 geoffroy aubey
-*/
-
 #ifndef EMULATOR_H_
 # define EMULATOR_H_
+
+typedef unsigned char BYTE;
+typedef unsigned short WORD;
 
 # include "graphics.h"
 # define NB_REGISTER 16
@@ -20,10 +13,7 @@
     {printf("Error, stack overflow or no adress on stack\n"); return 1;}
 # define CHECK_REGISTER(x) if (!((x) < NB_REGISTER))			\
     {printf("Error, register adress is out of range\n"); return 1;}
-
-typedef unsigned char BYTE;
-typedef unsigned short WORD;
-
+class Graphics;
 
 typedef class Emulator
 {

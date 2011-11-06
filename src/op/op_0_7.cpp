@@ -1,5 +1,4 @@
-
-#include <SDL/SDL.h>
+#include <cstdio>
 #include <stdlib.h>
 #include "emulator.h"
 #include "op.h"

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <time.h>
 #include "emulator.h"
 #include "op.h"
@@ -57,7 +58,6 @@ int	Emulator::op_DXYN(WORD opcode)
 	    }
 	}
     }
-  graphics->Flip();
   return 0;
 }
 

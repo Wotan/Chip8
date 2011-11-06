@@ -1,52 +1,51 @@
-#include <SDL/SDL.h>
 #include "emulator.h"
 #include "graphics.h"
 
 int	Graphics::HandleEvents(Emulator *emu, int *pause)
 {
-  SDL_Event	event;
-  int		i;
+  sf::Event event;
 
-  SDL_PollEvent(&event);
-  switch (event.type)
+  mWindow.PollEvent(event);
+  switch (event.Type)
     {
-    case SDL_QUIT:
+    case sf::Event::Closed:
       return 1;
       break ;
-    case SDL_KEYDOWN:
-      switch (event.key.keysym.sym)
+
+    case sf::Event::KeyPressed:
+      switch(event.Key.Code)
 	{
-	case SDLK_SPACE:
+	case sf::Keyboard::Space:
 	  emu->DoCycle();
 	  break ;
-	case SDLK_p:
+	case sf::Keyboard::P:
 	  if (mPRelease)
 	    {
 	      *pause = !*pause;
 	      mPRelease = 0;
 	    }
 	  break ;
-	case SDLK_ESCAPE:
+	case sf::Keyboard::Escape:
 	  return 1;
+	  break;
+	default:
+	  break ;
+	}
+      break ;
+
+    case sf::Event::KeyReleased:
+      switch(event.Key.Code)
+	{
+	case sf::Keyboard::P:
+	  mPRelease = 1;
 	  break ;
 	default:
-	  for (i = 0; i < 16; i++)
-	    {
-	      if (key_tab[i] == event.key.keysym.sym)
-		mKey[i] = 1;
-	    }
 	  break ;
-	}
+	  }
       break;
-    case SDL_KEYUP:
-      if (event.key.keysym.sym == SDLK_p)
-	mPRelease = 1;
-      for (i = 0; i < 16; i++)
-	{
-	  if (key_tab[i] == event.key.keysym.sym)
-	    mKey[i] = 0;
-	}
-      break;
+
+    default:
+      break ;
     }
   return 0;
 }

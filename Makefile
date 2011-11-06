@@ -8,7 +8,7 @@ DEBUG 		=	yes
 SRCDIR 		=	src/
 
 # Threads
-LDFLAGS		+=	-lSDL
+LDFLAGS		+=	-lsfml-system -lsfml-graphics
 
 # DIR
 DEBUG_DIR 	=	bin/
@@ -42,7 +42,6 @@ CFLAGS	+=	-W -Wall -pedantic $(LDINC)
 SRC	=	main.cpp	\
 		graphics.cpp	\
 		events.cpp	\
-		sync.cpp	\
 		emulator.cpp	\
 		op/op_0_7.cpp	\
 		op/op_8_9.cpp	\
