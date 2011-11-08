@@ -85,6 +85,7 @@ void	Graphics::OpenFile()
 	delete mEmu;
       mEmu = new Emulator();
       mEmu->SetGraphics(this);
+      ClearScreen();
       if (!mEmu->Open(mFileName))
 	{
 	  QMessageBox::critical(this, "Error", FILE_ERROR);
