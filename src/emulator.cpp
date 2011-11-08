@@ -24,7 +24,6 @@ int		Emulator::DoCycle()
   PC += 2;
   if (timer > 0)
     timer--;
-  printf("opcode = %04x\n", opcode);
   switch (opcode & 0xF000)
     {
     case 0x0000:

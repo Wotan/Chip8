@@ -37,7 +37,6 @@ int	Emulator::op_2NNN(WORD opcode)
   stack_ptr++;
   CHECK_STACK(stack_ptr);
   stack[stack_ptr] = PC;
-  printf("Jump : current adress %X\n", stack[stack_ptr]);
   PC = opcode & 0x0FFF;
   return 0;
 }
@@ -47,7 +46,6 @@ int	Emulator::op_3XNN(WORD opcode)
   WORD  VX = (opcode & 0x0F00) >> 8;
 
   CHECK_REGISTER(VX);
-  printf("op_3XNN VX:%X register\n", cpu_register[1]);
   if (cpu_register[VX] == (opcode & 0x00FF))
     PC += 2;
   return 0;
@@ -81,7 +79,6 @@ int	Emulator::op_6XNN(WORD opcode)
 
   CHECK_REGISTER(VX);
   cpu_register[VX] = (opcode & 0x00FF);
-  printf("Set reg%X to %X\n", VX, cpu_register[VX]);
   return 0;
 }
 

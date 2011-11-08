@@ -39,10 +39,6 @@ int	Emulator::op_DXYN(WORD opcode)
   CHECK_REGISTER(VX);
   CHECK_REGISTER(VY);
   cpu_register[0xF] = 0;
-  printf("Dessin\n");
-  printf("Coordonate : X %i Y %i\n", cpu_register[VX],
-	 cpu_register[VY]);
-
   x = cpu_register[VX];
   y = cpu_register[VY];
   for (j = 0; j < height; j++)
