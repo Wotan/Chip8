@@ -12,7 +12,7 @@ int	Emulator::op_0NNN(WORD opcode)
 
 int	Emulator::op_00E0(WORD opcode)
 {
-  graphics->Clear();
+  graphics->ClearScreen();
   opcode = opcode;
   return 0;
 }
