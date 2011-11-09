@@ -17,7 +17,8 @@ int	Emulator::op_FX0A(WORD opcode)
   WORD  VX = (opcode & 0x0F00) >> 8;
 
   printf("Waiting event\n");
-  cpu_register[VX] = graphics->WaitKey();
+  mRegToSet = VX;
+  mWaitingKey = true;
   return 0;
 }
 

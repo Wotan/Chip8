@@ -20,6 +20,14 @@ int		Emulator::DoCycle()
 {
   WORD opcode;
 
+  if (mWaitingKey)
+    {
+      int key = graphics->GetKey();
+      if (key == 0xFF)
+	return 0;
+      cpu_register[mRegToSet] = key;
+      mWaitingKey = false;
+    }
   opcode = GetWord(PC);
   PC += 2;
   if (timer > 0)
@@ -172,6 +180,7 @@ Emulator::Emulator()
 {
   QString	fileName;
 
+  mWaitingKey = false;
   stack_ptr = -1;
   PC = 0x200;
   I = 0;

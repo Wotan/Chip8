@@ -105,6 +105,7 @@ void	Graphics::OnInit()
   mPause = 0;
   Flip();
   ClearScreen();
+  mKeyClock.Reset();
 
   std::cout << "OnInit()" << std::endl;
 
@@ -200,18 +201,17 @@ void	Graphics::ClearScreen()
       SetPixel(i, j, false);
 }
 
-BYTE	Graphics::WaitKey()
+BYTE	Graphics::GetKey()
 {
-  sf::Event event;
 
-  for (;;)
+  if (mKeyClock.GetElapsedTime() > TIME_WAIT_KEY)
     {
-      WaitEvent(event);
+      mKeyClock.Reset();
       for (int i = 0; i < 0xF; i++)
-	if (event.Key.Code == mKey[i])
+	if (IsKeyUp(i))
 	  return i;
     }
-  return 0;
+  return 0xFF;
 }
 
 bool	Graphics::IsKeyUp(BYTE numKey)

@@ -8,6 +8,7 @@
 # include "emulator.h"
 
 # define FILE_ERROR "Error, can't open file"
+# define TIME_WAIT_KEY 100
 
 class	Emulator;
 
@@ -26,7 +27,7 @@ public:
   void		ClearScreen();
   int		HandleEvents(Emulator *emu);
   bool		IsKeyUp(BYTE numKey);
-  BYTE		WaitKey();
+  BYTE		GetKey();
 
 public slots:
   void		OpenFile();
@@ -41,6 +42,7 @@ private:
   sf::Texture		mScreen;
   sf::Sprite		mScreenSprite;
   sf::Keyboard::Key	mKey[16];
+  sf::Clock		mKeyClock;
   int			mPRelease;
   bool			mPixelTab[64][32];
 

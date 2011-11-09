@@ -79,8 +79,11 @@ private:
   int		PC;
   BYTE		timer;
   BYTE		sound_timer;
-  Graphics	*graphics;
 
+  bool		mWaitingKey;
+
+  BYTE		mRegToSet;
+  Graphics	*graphics;
 };
 
 #endif /* EMULATOR_H_ */

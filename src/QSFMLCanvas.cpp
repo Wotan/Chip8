@@ -13,6 +13,7 @@ myInitialized (false)
   setAttribute(Qt::WA_OpaquePaintEvent);
   setAttribute(Qt::WA_NoSystemBackground);
   setFocusPolicy(Qt::StrongFocus);
+  SetActive(true);
   move(Position);
   resize(Size);
   myTimer.setInterval(FrameTime);
